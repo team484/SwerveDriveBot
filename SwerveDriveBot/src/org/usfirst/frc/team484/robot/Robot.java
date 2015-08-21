@@ -86,6 +86,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         sDrive.drive(stick0.getDirectionDegrees(), stick0.getMagnitude(), -stick1.getX());
+        System.out.println("FL: " + sDrive.getPIDError(SwerveDrive.MotorType.kFrontLeft));
     }
     
     /**
