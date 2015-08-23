@@ -14,6 +14,12 @@ import org.usfirst.frc.team484.robot.subsystems.ExampleSubsystem;
 
 public class Robot extends IterativeRobot {
 
+	public static int state = 0; //0 - test wheel rotation 1 - if wheels rotated couter-clockwise 2 - if wheels rotated clockwise
+	public static double kP = 0.2;
+	public static double kI = 0.0;
+	public static double kD = 0.0;
+	
+	
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Jaguar spFL = new Jaguar(4); 
@@ -42,7 +48,11 @@ public class Robot extends IterativeRobot {
     	iEncFR.setDistancePerPulse(0.86694762);
     	iEncRR.setDistancePerPulse(0.86694762);
 		oi = new OI();
-		sDrive = new SwerveDrive(0.2, 0.0, 0.0, iEncFL, iEncRL, iEncFR, iEncRR, spFL, spRL, spFR, spRR, iTransFL, iTransRL, iTransFR, iTransRR, true);
+		if (state == 1) {
+			sDrive = new SwerveDrive(kP, kI, kD, iEncFL, iEncRL, iEncFR, iEncRR, spFL, spRL, spFR, spRR, iTransFL, iTransRL, iTransFR, iTransRR, false);
+		} else if (state == 2) {
+			sDrive = new SwerveDrive(kP, kI, kD, iEncFL, iEncRL, iEncFR, iEncRR, spFL, spRL, spFR, spRR, iTransFL, iTransRL, iTransFR, iTransRR, true);
+		}
 		sDrive.setWheelbaseDimensions(15.0, 30.0);
 		// instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
@@ -85,7 +95,14 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        sDrive.drive(stick0.getDirectionDegrees(), stick0.getMagnitude(), -stick1.getX());
+        if (state == 1 || state == 2) {
+        	sDrive.drive(stick0.getDirectionDegrees(), stick0.getMagnitude(), -stick1.getX());
+        } else {
+        	spFL.set(0.5);
+        	spRL.set(0.5);
+        	spFR.set(0.5);
+        	spRR.set(0.5);
+        }
         System.out.println("FL: " + sDrive.getPIDError(SwerveDrive.MotorType.kFrontLeft));
     }
     
