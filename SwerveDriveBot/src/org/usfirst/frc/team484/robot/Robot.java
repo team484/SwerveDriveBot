@@ -15,6 +15,7 @@ import org.usfirst.frc.team484.robot.subsystems.ExampleSubsystem;
 public class Robot extends IterativeRobot {
 
 	public static int state = 0; //0 - test wheel rotation 1 - if wheels rotated couter-clockwise 2 - if wheels rotated clockwise
+	public static boolean twistyStick = false; //Set to true if a stick with the ability to twist is plugged in
 	public static double kP = 0.2;
 	public static double kI = 0.0;
 	public static double kD = 0.0;
@@ -38,7 +39,7 @@ public class Robot extends IterativeRobot {
 	public static Encoder iEncRR = new Encoder(6, 7);
 	public static SwerveDrive sDrive;
 	public static Joystick stick0 = new Joystick(0);
-	public static Joystick stick1 = new Joystick(1);
+	public static Joystick stick1;
 
     Command autonomousCommand;
 
@@ -47,6 +48,9 @@ public class Robot extends IterativeRobot {
     	iEncRL.setDistancePerPulse(0.86694762);
     	iEncFR.setDistancePerPulse(0.86694762);
     	iEncRR.setDistancePerPulse(0.86694762);
+    	if (!twistyStick) {
+    		stick1 = new Joystick(1);
+    	}
 		oi = new OI();
 		if (state == 1) {
 			sDrive = new SwerveDrive(kP, kI, kD, iEncFL, iEncRL, iEncFR, iEncRR, spFL, spRL, spFR, spRR, iTransFL, iTransRL, iTransFR, iTransRR, false);
@@ -96,7 +100,11 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         if (state == 1 || state == 2) {
-        	sDrive.drive(stick0.getDirectionDegrees(), stick0.getMagnitude(), -stick1.getX());
+        	if (twistyStick) {
+        		sDrive.drive(stick0.getDirectionDegrees(), stick0.getMagnitude(), -stick0.getTwist());
+        	} else {
+        		sDrive.drive(stick0.getDirectionDegrees(), stick0.getMagnitude(), -stick1.getX());
+        	}
         } else {
         	spFL.set(0.5);
         	spRL.set(0.5);
