@@ -1,10 +1,10 @@
 package org.usfirst.frc.team484.robot;
 
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.SpeedController;
 
@@ -123,6 +123,18 @@ public class SwerveDrive {
 				public double pidGet() {
 					return findEncAng(encFL.getDistance());
 				}
+
+				@Override
+				public void setPIDSourceType(PIDSourceType pidSource) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public PIDSourceType getPIDSourceType() {
+					// TODO Auto-generated method stub
+					return null;
+				}
 			}, new PIDOutput() {
 				public void pidWrite(double d) {
 					rotFL.set(-d);
@@ -131,6 +143,18 @@ public class SwerveDrive {
 			pidRL = new PIDController(kP, kI, kD, new PIDSource() {
 				public double pidGet() {
 					return findEncAng(encRL.getDistance());
+				}
+
+				@Override
+				public void setPIDSourceType(PIDSourceType pidSource) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public PIDSourceType getPIDSourceType() {
+					// TODO Auto-generated method stub
+					return null;
 				}
 			}, new PIDOutput() {
 				public void pidWrite(double d) {
@@ -141,6 +165,18 @@ public class SwerveDrive {
 				public double pidGet() {
 					return findEncAng(encFR.getDistance());
 				}
+
+				@Override
+				public void setPIDSourceType(PIDSourceType pidSource) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public PIDSourceType getPIDSourceType() {
+					// TODO Auto-generated method stub
+					return null;
+				}
 			}, new PIDOutput() {
 				public void pidWrite(double d) {
 					rotFR.set(-d);
@@ -149,6 +185,18 @@ public class SwerveDrive {
 			pidRR = new PIDController(kP, kI, kD, new PIDSource() {
 				public double pidGet() {
 					return findEncAng(encRR.getDistance());
+				}
+
+				@Override
+				public void setPIDSourceType(PIDSourceType pidSource) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public PIDSourceType getPIDSourceType() {
+					// TODO Auto-generated method stub
+					return null;
 				}
 			}, new PIDOutput() {
 				public void pidWrite(double d) {
@@ -160,6 +208,18 @@ public class SwerveDrive {
 				public double pidGet() {
 					return findEncAng(encFL.getDistance());
 				}
+
+				@Override
+				public void setPIDSourceType(PIDSourceType pidSource) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public PIDSourceType getPIDSourceType() {
+					// TODO Auto-generated method stub
+					return null;
+				}
 			}, new PIDOutput() {
 				public void pidWrite(double d) {
 					rotFL.set(d);
@@ -168,6 +228,18 @@ public class SwerveDrive {
 			pidRL = new PIDController(kP, kI, kD, new PIDSource() {
 				public double pidGet() {
 					return findEncAng(encRL.getDistance());
+				}
+
+				@Override
+				public void setPIDSourceType(PIDSourceType pidSource) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public PIDSourceType getPIDSourceType() {
+					// TODO Auto-generated method stub
+					return null;
 				}
 			}, new PIDOutput() {
 				public void pidWrite(double d) {
@@ -178,6 +250,18 @@ public class SwerveDrive {
 				public double pidGet() {
 					return findEncAng(encFR.getDistance());
 				}
+
+				@Override
+				public void setPIDSourceType(PIDSourceType pidSource) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public PIDSourceType getPIDSourceType() {
+					// TODO Auto-generated method stub
+					return null;
+				}
 			}, new PIDOutput() {
 				public void pidWrite(double d) {
 					rotFR.set(d);
@@ -186,6 +270,18 @@ public class SwerveDrive {
 			pidRR = new PIDController(kP, kI, kD, new PIDSource() {
 				public double pidGet() {
 					return findEncAng(encRR.getDistance());
+				}
+
+				@Override
+				public void setPIDSourceType(PIDSourceType pidSource) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public PIDSourceType getPIDSourceType() {
+					// TODO Auto-generated method stub
+					return null;
 				}
 			}, new PIDOutput() {
 				public void pidWrite(double d) {
